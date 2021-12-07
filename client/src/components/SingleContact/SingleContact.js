@@ -1,19 +1,21 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import actionTypesContacts from '../../redux/actionTypes/contactsAT'
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import actionTypesContacts from '../../redux/actionTypes/contactsAT';
 
 const SingleContact = ({ id, name }) => {
   const dispatch = useDispatch()
   const handleDelete = () => {
-    dispatch({type: actionTypesContacts.DELETE_CONTACT_START, payload: id});
-    console.log('deleted');
+    dispatch({ type: actionTypesContacts.DELETE_CONTACT_START, payload: id });
   }
   return (
-    <div className="container mt-5">
-      <div>
-        <p>{name}</p>
+    <div style={{margin: '20px'}}>
+      <div className="card" style={{width: "18rem"}}>
+        <div className ="card-body">
+        <h5 className ="card-title">{name}</h5>
         <button className="btn btn-secondary" onClick={handleDelete}>Delete</button>
-        <button className="btn btn-info">Edit</button>
+        <Link to={`/edit/${id}`} className="btn btn-info ml-5">Edit</Link>
+        </div>
       </div>
     </div>
   )

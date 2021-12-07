@@ -33,11 +33,37 @@ const contactsReducer = (state = initalState, action) => {
         list: copyList.filter(el => el.id !== action.payload)
       }
     }
-    case actionTypesContacts.DELETE_CONTACT_ERROR:
+    case actionTypesContacts.ADD_CONTACT_START:
       return {
         ...state,
-        error: action.payload,
+        error: null,
       }
+    case actionTypesContacts.ADD_CONTACT_SUCCESS: {
+      const copyList = [...state.list];
+      return {
+        ...state,
+        list: [...copyList, { id: action.payload.id, name: action.payload.name }]
+      }
+    }
+    case actionTypesContacts.EDIT_CONTACT_START:
+      return {
+        ...state,
+        error: null,
+      }
+    case actionTypesContacts.EDIT_CONTACT_SUCCESS: {
+      const copyList = [...state.list];
+      console.log(copyList, '1');
+      copyList.forEach((el) => {
+        if (el.id === action.payload.id) {
+          el.name = action.payload.name
+        }
+      });
+      console.log(copyList, '2');
+      return {
+        ...state,
+        list: copyList,
+      }
+    }
     default:
       return state;
   }

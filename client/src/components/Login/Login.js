@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import actionTypesLogin from '../../redux/actionTypes/loginAT';
 
 const Login = () => {
-  const history = useHistory()
+  const history = useHistory();
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
