@@ -58,13 +58,14 @@ function* editContact(action) {
       url: `https://jsonplaceholder.typicode.com/users/${action.payload.id}`,
       method: "PUT",
       body: JSON.stringify({
-        name: action.payload,
+        name: action.payload.name,
       }),
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       },
     });
-    yield put({ type: actionTypesContacts.EDIT_CONTACT_SUCCESS, payload: { id: updatedUser.id, name: action.payload.name } });
+    console.log(updatedUser);
+    yield put({ type: actionTypesContacts.EDIT_CONTACT_SUCCESS, payload: { id: updatedUser.id, name: updatedUser.name } });
   } catch (error) {
     yield put({ type: actionTypesContacts.INIT_CONTACTS_ERROR, payload: error.message });
   }
